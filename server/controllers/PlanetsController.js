@@ -8,6 +8,7 @@ export class PlanetsController extends BaseController {
     this.router
       .post('', this.createPlanet)
       .get('', this.getPlanets)
+      .put('/:planetId', this.editPlanets)
   }
 
   async createPlanet(request, response, next) {
@@ -27,6 +28,19 @@ export class PlanetsController extends BaseController {
       const planets = await planetsService.getPlanet(request.query)
       response.send(planets)
 
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async editPlanets(request, response, next) {
+    try {
+      const updates = request.body
+      const planetId = request.params.planetId
+
+      const editPlanet = await planetsService.editPlanet(planetId, updates)
+
+      response.send(editPlanet)
     } catch (error) {
       next(error)
     }
