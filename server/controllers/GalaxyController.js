@@ -11,6 +11,11 @@ export class GalaxyController extends BaseController {
     this.router
       .post('', this.createGalaxy)
       .get('', this.getGalaxy)
+      .put('/:galaxyId', this.editGalaxy)
+
+    // going to make a get where we can get planets according to what galaxy they are in.
+
+    // .get('/:galaxy/planets')
   }
 
   async createGalaxy(request, response, next) {
@@ -33,5 +38,20 @@ export class GalaxyController extends BaseController {
       next(error)
     }
   }
+
+
+  async editGalaxy(request, response, next) {
+    try {
+      const updates = request.body
+      const galaxyId = request.params.galaxyId
+      const editedGalaxy = await galaxyService.editGalaxy(galaxyId, updates)
+
+      response.send(editedGalaxy)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+
 
 }
