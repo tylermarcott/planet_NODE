@@ -8,7 +8,7 @@ export class PlanetsController extends BaseController {
     this.router
       .post('', this.createPlanet)
   }
-  async createPlanet(response, request, next) {
+  async createPlanet(request, response, next) {
     try {
       const body = request.body
 
