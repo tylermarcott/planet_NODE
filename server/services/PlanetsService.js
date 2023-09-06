@@ -10,6 +10,10 @@ class PlanetsService {
   }
 
 
+  getPlanet(query) {
+    const getPlanet = dbContext.Planet.find(query)
+    return getPlanet
+  }
 }
 
 
